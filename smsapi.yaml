@@ -24,15 +24,21 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                "$ref": "#/components/schemas/SendSMSResponse"
             application/json:
               schema:
                 "$ref": "#/components/schemas/SendSMSResponse"
-            text/json:
+        '400':
+          description: BadRequest (Parámetros de entrada inválidos)
+          content:
+            application/json:
               schema:
-                "$ref": "#/components/schemas/SendSMSResponse"
+                "$ref": "#/components/schemas/SingleSmsFileResponse"
+        '401':
+          description: Unauthorized (Bad API Key)
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SingleSmsFileResponse"                
   "/Sms/file":
     post:
       summary: Enviar un archivo
@@ -53,15 +59,21 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                "$ref": "#/components/schemas/SingleSmsFileResponse"
             application/json:
               schema:
                 "$ref": "#/components/schemas/SingleSmsFileResponse"
-            text/json:
+        '400':
+          description: BadRequest (Parámetros de entrada inválidos)
+          content:
+            application/json:
               schema:
-                "$ref": "#/components/schemas/SingleSmsFileResponse"  
+                "$ref": "#/components/schemas/SingleSmsFileResponse"
+        '401':
+          description: Unauthorized (Bad API Key)
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SingleSmsFileResponse"                
 components:
   schemas:
     SendSMSRequest:
