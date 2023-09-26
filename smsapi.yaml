@@ -6,7 +6,7 @@ info:
 paths:
   "/Sms":
     post:
-      summary: Enviar un mensaje SMS a un teléfono especfico
+      summary: Enviar un mensaje
       tags:
       - Sms
       requestBody:
@@ -35,7 +35,7 @@ paths:
                 "$ref": "#/components/schemas/SendSMSResponse"
   "/Sms/file":
     post:
-      summary: Enviar un mensaje SMS a un teléfono especfico con un link corto a un archivo
+      summary: Enviar un archivo
       tags:
       - Sms
       requestBody:
