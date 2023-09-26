@@ -59,62 +59,9 @@ paths:
                 "$ref": "#/components/schemas/SingleSmsFileResponse"
             text/json:
               schema:
-                "$ref": "#/components/schemas/SingleSmsFileResponse"
-  "/SmsInternal":
-    post:
-      tags:
-      - SmsInternal
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/SendSMSInternalRequest"
-          text/json:
-            schema:
-              "$ref": "#/components/schemas/SendSMSInternalRequest"
-          application/*+json:
-            schema:
-              "$ref": "#/components/schemas/SendSMSInternalRequest"
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                "$ref": "#/components/schemas/SendSMSResponse"
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/SendSMSResponse"
-            text/json:
-              schema:
-                "$ref": "#/components/schemas/SendSMSResponse"
+                "$ref": "#/components/schemas/SingleSmsFileResponse"  
 components:
   schemas:
-    SendSMSInternalRequest:
-      required:
-      - celular
-      - clientId
-      - clientKey
-      - mensaje
-      - referencia
-      type: object
-      properties:
-        clientKey:
-          minLength: 1
-          type: string
-        clientId:
-          minLength: 1
-          type: string
-        celular:
-          minLength: 1
-          type: string
-        mensaje:
-          minLength: 1
-          type: string
-        referencia:
-          minLength: 1
-          type: string
-      additionalProperties: false
     SendSMSRequest:
       required:
       - celular
