@@ -6,6 +6,7 @@ info:
 paths:
   "/Sms":
     post:
+      summary: Enviar un mensaje SMS a un teléfono especfico
       tags:
       - Sms
       requestBody:
@@ -34,6 +35,7 @@ paths:
                 "$ref": "#/components/schemas/SendSMSResponse"
   "/Sms/file":
     post:
+      summary: Enviar un mensaje SMS a un teléfono especfico con un link corto a un archivo
       tags:
       - Sms
       requestBody:
@@ -73,12 +75,15 @@ components:
         clientKey:
           minLength: 1
           type: string
+          description: Su API Key
         celular:
           minLength: 1
           type: string
+          description: Número de celular
         mensaje:
           minLength: 1
           type: string
+          description: Mensaje a enviar
         referencia:
           minLength: 1
           type: string
@@ -88,35 +93,41 @@ components:
       properties:
         mensajeId:
           type: string
-          nullable: true
+          nullable: false
         resultado:
           type: string
-          nullable: true
+          nullable: false
       additionalProperties: false
     SingleSendFileRequest:
       type: object
       properties:
         clientKey:
           type: string
-          nullable: true
+          nullable: false
+          description: Su API Key
         celular:
           type: string
-          nullable: true
+          nullable: false
+          description: Número de celular
         mensaje:
           type: string
-          nullable: true
+          nullable: false
+          description: Mensaje a enviar
         contenido:
           type: string
           format: byte
-          nullable: true
+          nullable: false
+          description: Contenido del archivo en BASE-64 Encoding
       additionalProperties: false
     SingleSmsFileResponse:
       type: object
       properties:
         jobId:
           type: string
-          nullable: true
+          nullable: false
+          description: Número de trabajo asignado para su referencia
         envioId:
           type: integer
           format: int64
+          description: ID de envío asignado para su referencia
       additionalProperties: false
