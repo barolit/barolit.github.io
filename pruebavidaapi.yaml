@@ -1,0 +1,254 @@
+openapi: 3.0.1
+info:
+  title: Barolit SMS Services API
+  version: v2
+paths:
+  /api/Fotos:
+    post:
+      tags:
+        - Fotos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhotoRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PhotoRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PhotoRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PhotoResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PhotoResponse'
+  /api/PruebaVida:
+    post:
+      tags:
+        - PruebaVida
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PruebaVidaRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PruebaVidaRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PruebaVidaRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PruebaVidaResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PruebaVidaResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PruebaVidaResponse'
+  /api/PruebaVida/status/{instanceId}:
+    get:
+      tags:
+        - PruebaVida
+      parameters:
+        - name: instanceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+  /api/PruebaVida/status/ak/{instanceId}:
+    get:
+      tags:
+        - PruebaVida
+      parameters:
+        - name: instanceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+  /api/PruebaVida/autentikarhook:
+    post:
+      tags:
+        - PruebaVida
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshInstancesRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RefreshInstancesRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RefreshInstancesRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PruebaVidaResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PruebaVidaResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PruebaVidaResponse'
+components:
+  schemas:
+    PersonData:
+      type: object
+      properties:
+        names:
+          type: string
+          nullable: true
+        lastNames:
+          type: string
+          nullable: true
+        birthDate:
+          type: string
+          nullable: true
+        number:
+          type: string
+          nullable: true
+        nationality:
+          type: string
+          nullable: true
+        profession:
+          type: string
+          nullable: true
+        valid:
+          type: boolean
+        fatherName:
+          type: string
+          nullable: true
+        address:
+          type: string
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        birthplace:
+          type: string
+          nullable: true
+        educationLevel:
+          type: string
+          nullable: true
+        deathDate:
+          type: string
+          nullable: true
+        motherName:
+          type: string
+          nullable: true
+        fullName:
+          type: string
+          nullable: true
+        birthprovince:
+          type: string
+          nullable: true
+        civilStatus:
+          type: string
+          nullable: true
+        expirationDate:
+          type: string
+          nullable: true
+        fotoBase64:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PhotoRequest:
+      required:
+        - apiKey
+        - cedula
+      type: object
+      properties:
+        apiKey:
+          type: string
+        cedula:
+          type: string
+      additionalProperties: false
+    PhotoResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+          nullable: true
+        person:
+          $ref: '#/components/schemas/PersonData'
+      additionalProperties: false
+    PruebaVidaRequest:
+      type: object
+      properties:
+        telefono:
+          type: string
+          nullable: true
+        mensaje:
+          type: string
+          nullable: true
+        idReferencia:
+          type: string
+          nullable: true
+        pais:
+          type: string
+          nullable: true
+        tipoDocumento:
+          type: string
+          nullable: true
+        numeroDocumento:
+          type: string
+          nullable: true
+        flujoSimple:
+          type: boolean
+      additionalProperties: false
+    PruebaVidaResponse:
+      type: object
+      properties:
+        instance:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        statusCode:
+          type: integer
+          format: int64
+      additionalProperties: false
+    RefreshInstancesRequest:
+      type: object
+      properties:
+        instances:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      description: API Key Authentication using the Authorization header
+      name: X-API-KEY
+      in: header
+security:
+  - apiKeyAuth: []
